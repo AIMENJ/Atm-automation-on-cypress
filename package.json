@@ -1,0 +1,23 @@
+{
+  "name": "cypressautomation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aimen",
+  "license": "ISC",
+  "dependencies": {
+    "-": "^0.0.1",
+    "axios": "^1.6.0",
+    "dayjs": "^1.11.11",
+    "pdf-parse": "^1.1.1",
+    "save-dev": "^0.0.1-security",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "cypress": "^13.4.0",
+    "cypress-file-upload": "^5.0.8"
+  }
+}
