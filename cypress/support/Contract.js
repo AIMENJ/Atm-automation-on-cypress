@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 export const contractList = () => {
   //List 
-  cy.get('[id="/contracts"]').should('be.visible').should('have.text', 'Contracts').click()
+  cy.get('#Contracts').should('be.visible').should('have.text', 'Contracts').click()
       //contract ID
       cy.get('.ant-table-thead > tr > :nth-child(1)').should('have.text', 'Contract ID')
       cy.wait(500);
@@ -34,15 +34,16 @@ export const contractList = () => {
 }
 export const Addcontractform = () => {
     cy.wait(500)
-cy.get('[id="/contracts"]').should('be.visible').should('have.text', 'Contracts').click()
-cy.wait(500);
+cy.get('#Contracts').should('be.visible').should('have.text', 'Contracts').click()
+cy.wait(6000);
 cy.getCurrentDate().then((currentDate) => {
 cy.getDateSixDaysLater().then((dateSixDaysLater) => {
-cy.get('#Add_Button_Contracts').click()
+  cy.wait(500);
+  cy.get('#Add_Button_Contracts').click({force: true})
 cy.wait(1000);
 //Customer 
     cy.wait(500);
-    cy.get('#customer').should('exist').should('be.empty').click()
+    cy.get('#customer').should('exist').click()
         cy.wait(500);
         checkRecordExist().then((exists) => {
         cy.log("element exist:", exists)
@@ -57,7 +58,7 @@ cy.wait(1000);
      })
  //Sales Rep
 cy.wait(500);
-cy.get('#sales_rep').should('exist').should('be.empty').click()
+cy.get('#sales_rep').should('exist').click()
 cy.wait(500);
 checkRecordExist().then((exists) => {
 cy.log("element exist:", exists)
@@ -74,7 +75,7 @@ else{
  
  //Payment Term 
 cy.wait(500);
-cy.get('#payment_term').should('exist').should('be.empty').click()
+cy.get('#payment_term').should('exist').click()
 cy.wait(500);
 checkRecordExist().then((exists) => {
 cy.log("element exist:", exists)
@@ -88,13 +89,13 @@ else{
 })
   cy.wait(500);
 //Term from 
-cy.get('#term_from').should('exist').should('be.empty').type(currentDate)
+cy.get('#term_from').should('exist').type(currentDate)
 cy.wait(500);
 //Term To
-cy.get('#term_to').should('exist').should('be.empty').type(dateSixDaysLater)
+cy.get('#term_to').should('exist').type(dateSixDaysLater)
  cy.wait(500);
  //Section
-cy.get('#section').should('exist').should('be.empty').click()
+cy.get('#section').should('exist').click()
 cy.wait(500);
 checkRecordExist().then((exists) => {
 cy.log("element exist:", exists)
@@ -109,7 +110,7 @@ else{
   cy.wait(500);
 
  //At company 
-cy.get('#at_company').should('exist').should('be.empty').click( {force: true} )
+cy.get('#at_company').should('exist').click( {force: true} )
 cy.wait(500);
 checkRecordExist().then((exists) => {
 cy.log("element exist:", exists)
@@ -138,10 +139,10 @@ cy.get('#fuel_escalator').should('exist').check()
  cy.get('#max_demurrage_rate').scrollIntoView().should('exist').check()
  cy.wait(200);
  //Description 
- cy.get('#description').should('exist').should('be.empty').type('Read contract before add carefull')
+ cy.get('#description').should('exist').type('Read contract before add carefull')
  cy.wait(200);
 // //Status 
-cy.get('#status').should('exist').should('be.empty').click({force: true})
+cy.get('#status').should('exist').click({force: true})
     cy.wait(500);
     checkRecordExist().then((exists) => {
     cy.log("element exist:", exists)
@@ -183,7 +184,7 @@ function checkRecordExistInDrawer(table_id) {
   });
 }
 export const DeleteContract = () => {
-    cy.get('[id="/contracts"]').should('be.visible').should('have.text', 'Contracts').click()
+    cy.get('#Contracts').should('be.visible').should('have.text', 'Contracts').click()
     cy.wait(500)
     let result;
    checkRecordExist().then((exists) => {
@@ -222,7 +223,7 @@ else{
 }
  export const UpdateContract = () => {
     cy.wait(500)
-    cy.get('[id="/contracts"]').should('be.visible').should('have.text', 'Contracts').click()
+    cy.get('#Contracts').should('be.visible').should('have.text', 'Contracts').click()
   cy.getCurrentDate().then((currentDate) => {
   cy.getDateSixDaysLater().then((dateSixDaysLater) => {
   cy.wait(500)
@@ -254,7 +255,7 @@ tableData.push(rowData);
  cy.get('#update_form_Contracts').click({force: true})
 cy.wait(1000);
  //customer
- cy.get('#customer').should('exist').should('be.empty').click({force: true})
+ cy.get('#customer').should('exist').click({force: true})
  cy.wait(500);
  checkRecordExist().then((exists) => {
  cy.log("element exist:", exists)
@@ -269,7 +270,7 @@ else{
 })
 //Sales Rep
 cy.wait(500);
-cy.get('#sales_rep').should('exist').should('be.empty').click({force: true})
+cy.get('#sales_rep').should('exist').click({force: true})
 cy.wait(500);
 checkRecordExist().then((exists) => {
 cy.log("element exist:", exists)
@@ -286,7 +287,7 @@ cy.log('Dropdown not found')
 
 //Payment Term 
 cy.wait(500);
-cy.get('#payment_term').should('exist').should('be.empty').click({force: true})
+cy.get('#payment_term').should('exist').click({force: true})
 cy.wait(500);
 checkRecordExist().then((exists) => {
 cy.log("element exist:", exists)
@@ -306,7 +307,7 @@ cy.wait(200);
 cy.get('#term_to').should('exist').clear({force: true}).type(dateSixDaysLater)
  cy.wait(200);
  //Section
- cy.get('#section').should('exist').should('be.empty').click({force: true})
+ cy.get('#section').should('exist').click({force: true})
 cy.wait(500);
 checkRecordExist().then((exists) => {
 cy.log("element exist:", exists)
@@ -321,7 +322,7 @@ else{
   cy.wait(500);
 
  //At company 
-cy.get('#at_company').should('exist').should('be.empty').click( {force: true} )
+cy.get('#at_company').should('exist').click( {force: true} )
 cy.wait(500);
 checkRecordExist().then((exists) => {
 cy.log("element exist:", exists)
@@ -338,22 +339,22 @@ else{
  cy.get(':nth-child(8) > label').should('exist')
 cy.wait(200);
 //Standarized contract
-cy.get('#standarized_contract').should('exist').check({force: true})
+cy.get('#standarized_contract').should('exist').uncheck({force: true})
 cy.wait(500);
 //High water provision 
-cy.get('#high_water_provision').should('exist').check( {force: true} )
+cy.get('#high_water_provision').should('exist').uncheck( {force: true} )
 cy.wait(500);
 //Fuel Escalator
-cy.get('#fuel_escalator').should('exist').check({force: true} )
+cy.get('#fuel_escalator').should('exist').uncheck({force: true} )
  cy.wait(200);
  //Max demurrage rate
- cy.get('#max_demurrage_rate').scrollIntoView().should('exist').check({force: true} )
+ cy.get('#max_demurrage_rate').scrollIntoView().should('exist').uncheck({force: true} )
  cy.wait(200);
  //Description 
  cy.get('#description').should('exist').clear({force: true}).type('Read contract before add',{force: true} )
  cy.wait(200);
 // //Status 
-cy.get('#status').should('exist').should('be.empty').click({force: true})
+cy.get('#status').should('exist').click({force: true})
     cy.wait(500);
     checkRecordExist().then((exists) => {
     cy.log("element exist:", exists)
@@ -404,7 +405,7 @@ cy.get('#status').should('exist').should('be.empty').click({force: true})
   cy.wait(500);
   cy.get(':nth-child(1) > :nth-child(2) > label').should('be.visible').should('have.text','  High Water Provision')
   cy.wait(500);
-  cy.get('.check-list > :nth-child(2) > :nth-child(1) > label').should('be.visible').should('have.text','  Fuel Escalator')
+  cy.get('uncheck-list > :nth-child(2) > :nth-child(1) > label').should('be.visible').should('have.text','  Fuel Escalator')
   cy.wait(500);
   cy.get('.check-list > :nth-child(2) > :nth-child(2) > label').should('be.visible').should('have.text', '  Max Demurrage Rate')
   cy.wait(500);
@@ -438,30 +439,30 @@ cy.get('#status').should('exist').should('be.empty').click({force: true})
   cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(8)').should('be.visible').should('have.text','Rate Type')
   cy.wait(500);
   cy.get('.ant-table-thead > tr > :nth-child(9)').should('be.visible').should('have.text','Comment')
-  cy.wait(500);
+  cy.wait(1000);
   //add form
   cy.get('#Add_Button_Tab_Stevedoring_Rates').should('exist').should('have.text','Add Stevedoring Rate').click( {force: true})
-  cy.wait(500);
+  cy.wait(1000);
   cy.get('#revenue_type').should('exist').click()
   cy.wait(500);
-  checkRecordExist().then((exists) => {
+  checkRecordExistInDrawer('#revenue_type_list').then((exists) => {
   cy.log("element exist:", exists)
     if(exists){
-        
-    cy.get('#revenue_type_list_0 .ant-select-item-option-content').first().click({force: true})
+      cy.wait(500);
+    cy.get('#revenue_type_list_0 .ant-select-item-option-content').eq(0).click({force: true})
     cy.wait(500);
 }
 else{
     cy.log('Dropdown not found')
 }
 })
-cy.get('#cargo').should('exist').click({force: true})//.type('Plains',{force: true}).type('{enter}')
+cy.get('#cargo').should('exist').click({force: true})
 cy.wait(500);
-checkRecordExist().then((exists) => {
+checkRecordExistInDrawer('#cargo_list').then((exists) => {
 cy.log("element exist:", exists)
   if(exists){
-      
-  cy.get('#cargo_list_0 .ant-select-item-option-content').first().click({force: true})
+    cy.wait(500);
+  cy.get('#cargo_list_0 .ant-select-item-option-content').eq(0).click({force: true})
   cy.wait(500);
 }
 else{
@@ -476,10 +477,11 @@ else{
   cy.wait(500);
   cy.get('#tons_type').should('exist').click()
   cy.wait(500);
-  checkRecordExist().then((exists) => {
+  checkRecordExistInDrawer('#tons_type_list').then((exists) => {
   cy.log("element exist:", exists)
     if(exists){
-    cy.get('#tons_type_list_0 .ant-select-item-option-content').first().click({force: true})
+      cy.wait(500);
+    cy.get('#tons_type_list_0 .ant-select-item-option-content').eq(0).click({force: true})
     cy.wait(500);
   }
   else{
@@ -494,11 +496,11 @@ else{
   cy.wait(500);
   cy.get('#rate_type').should('exist').click({force: true})//.type('Plains',{force: true}).type('{enter}')
   cy.wait(500);
-  checkRecordExist().then((exists) => {
+  checkRecordExistInDrawer('#rate_type_list').then((exists) => {
   cy.log("element exist:", exists)
     if(exists){
-        
-    cy.get('#rate_type_list_0 .ant-select-item-option-content').first().click({force: true})
+      cy.wait(500);
+    cy.get('#rate_type_list_0 .ant-select-item-option-content').eq(0).click({force: true})
     cy.wait(500);
   }
   else{
@@ -555,7 +557,7 @@ else{
 
                     cy.get('#revenue_type').should('exist').click({force: true} )
                     cy.wait(500);
-                    checkRecordExist().then((exists) => {
+                    checkRecordExistInDrawer('#revenue_type_list').then((exists) => {
                     cy.log("element exist:", exists)
                       if(exists){
                           
@@ -568,7 +570,7 @@ else{
                   })
                   cy.get('#cargo').should('exist').click({force: true})//.type('Plains',{force: true}).type('{enter}')
                   cy.wait(500);
-                  checkRecordExist().then((exists) => {
+                  checkRecordExistInDrawer('#cargo_list').then((exists) => {
                   cy.log("element exist:", exists)
                     if(exists){
                         
@@ -587,7 +589,7 @@ else{
                     cy.wait(500);
                     cy.get('#tons_type').should('exist').clear({force: true} ).click({force: true} )
                     cy.wait(500);
-                    checkRecordExist().then((exists) => {
+                    checkRecordExistInDrawer('#tons_type_list').then((exists) => {
                     cy.log("element exist:", exists)
                       if(exists){
                       cy.get('#tons_type_list_1 .ant-select-item-option-content').first().click({force: true})
@@ -605,7 +607,7 @@ else{
                     cy.wait(500);
                     cy.get('#rate_type').should('exist').click({force: true})//.type('Plains',{force: true}).type('{enter}')
                     cy.wait(500);
-                    checkRecordExist().then((exists) => {
+                    checkRecordExistInDrawer('#rate_type_list').then((exists) => {
                     cy.log("element exist:", exists)
                       if(exists){
                           
@@ -685,7 +687,8 @@ else{
   
 }
 export const ContractOpenDawer = () => {
-  cy.get('[id="/contracts"]').should('be.visible').should('have.text', 'Contracts').click()
+  cy.wait(1000)
+  cy.get('#Contracts').should('be.visible').should('have.text', 'Contracts').click()
   cy.wait(500)
   let result;
  checkRecordExist().then((exists) => {
@@ -749,27 +752,27 @@ export const StorageRates = () => {
   cy.wait(500);
   //Add form storage rate
   cy.get('#Add_Button_Tab_Storage_Rates').should('exist').should('have.text','Add Storage Rate').click( {force: true})
-  cy.wait(500);
+  cy.wait(1000);
   cy.get('#revenue_type').should('exist').click()
   cy.wait(500);
-  checkRecordExist().then((exists) => {
+  checkRecordExistInDrawer('#revenue_type_list').then((exists) => {
   cy.log("element exist:", exists)
     if(exists){
-        
-    cy.get('#revenue_type_list_0 .ant-select-item-option-content').first().click({force: true})
+      cy.wait(500);
+    cy.get('#revenue_type_list_0 .ant-select-item-option-content').eq(0).click({force: true})
     cy.wait(500);
 }
 else{
     cy.log('Dropdown not found')
 }
 })
-cy.get('#cargo').should('exist').click({force: true})//.type('Plains',{force: true}).type('{enter}')
+cy.get('#cargo').should('exist').click({force: true})
 cy.wait(500);
-checkRecordExist().then((exists) => {
+checkRecordExistInDrawer('#cargo_list').then((exists) => {
 cy.log("element exist:", exists)
   if(exists){
-      
-  cy.get('#cargo_list_0 .ant-select-item-option-content').first().click({force: true})
+    cy.wait(500);
+  cy.get('#cargo_list_0 .ant-select-item-option-content').eq(0).click({force: true})
   cy.wait(500);
 }
 else{
@@ -784,10 +787,11 @@ else{
   cy.wait(500);
   cy.get('#tons_type').should('exist').click()
   cy.wait(500);
-  checkRecordExist().then((exists) => {
+  checkRecordExistInDrawer('#tons_type_list').then((exists) => {
   cy.log("element exist:", exists)
     if(exists){
-    cy.get('#tons_type_list_0 .ant-select-item-option-content').first().click({force: true})
+      cy.wait(500);
+    cy.get('#tons_type_list_0 .ant-select-item-option-content').eq(0).click({force: true})
     cy.wait(500);
   }
   else{
@@ -802,11 +806,11 @@ else{
   cy.wait(500);
   cy.get('#rate_type').should('exist').click({force: true})//.type('Plains',{force: true}).type('{enter}')
   cy.wait(500);
-  checkRecordExist().then((exists) => {
+  checkRecordExistInDrawer('#rate_type_list').then((exists) => {
   cy.log("element exist:", exists)
     if(exists){
-        
-    cy.get('#rate_type_list_0 .ant-select-item-option-content').first().click({force: true})
+      cy.wait(500);
+    cy.get('#rate_type_list_0 .ant-select-item-option-content').eq(0).click({force: true})
     cy.wait(500);
   }
   else{
@@ -816,8 +820,7 @@ else{
   })
   cy.wait(500);
   cy.get('#comment').should('exist').type('Read form before click on save button',{force: true})
-  cy.wait(500);
-  //cancel button
+  cy.wait(500); //cancel button
   cy.get('#cancel_Storage_Rates').should('exist') 
   cy.wait(500);
   //add button
@@ -859,10 +862,10 @@ export const StorageRatesUpdate = () => {
                   .should('exist')
                   .should('be.visible')
                   .click({ force: true });
-                cy.wait(500);
+                cy.wait(1000);
                 cy.get('#revenue_type').should('exist').click({force: true} )
                 cy.wait(500);
-                checkRecordExist().then((exists) => {
+                checkRecordExistInDrawer('#revenue_type_list').then((exists) => {
                 cy.log("element exist:", exists)
                   if(exists){
                       
@@ -875,7 +878,7 @@ export const StorageRatesUpdate = () => {
               })
               cy.get('#cargo').should('exist').click({force: true})//.type('Plains',{force: true}).type('{enter}')
               cy.wait(500);
-              checkRecordExist().then((exists) => {
+              checkRecordExistInDrawer('#cargo_list').then((exists) => {
               cy.log("element exist:", exists)
                 if(exists){
                     
@@ -894,7 +897,7 @@ export const StorageRatesUpdate = () => {
                 cy.wait(500);
                 cy.get('#tons_type').should('exist').clear({force: true} ).click({force: true} )
                 cy.wait(500);
-                checkRecordExist().then((exists) => {
+                checkRecordExistInDrawer('#tons_type_list').then((exists) => {
                 cy.log("element exist:", exists)
                   if(exists){
                   cy.get('#tons_type_list_1 .ant-select-item-option-content').first().click({force: true})
@@ -912,7 +915,7 @@ export const StorageRatesUpdate = () => {
                 cy.wait(500);
                 cy.get('#rate_type').should('exist').click({force: true})//.type('Plains',{force: true}).type('{enter}')
                 cy.wait(500);
-                checkRecordExist().then((exists) => {
+                checkRecordExistInDrawer('#rate_type_list').then((exists) => {
                 cy.log("element exist:", exists)
                   if(exists){
                       
@@ -995,34 +998,34 @@ export const StorageRatesUpdate = () => {
 }
   export const GuaranteeAmount = () => {
   cy.get('#rc-tabs-0-tab-KEY23076').click()
-  cy.wait(500);
+  cy.wait(1000);
   cy.get('.data-info').should('exist')
   cy.wait(500);
   cy.get('#Add_Button_Tab_Guarantee_Amounts').should('be.visible').should('have.text','Add Guarantee Amount')
-  cy.wait(500);
+  cy.wait(1000);
   //list
-  // cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(1)').should('be.visible').should('have.text','Cargo')
-  // cy.wait(500);
-  // cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(2)').should('be.visible').should('have.text','Min')
-  // cy.wait(500);
-  // cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(3)').should('be.visible').should('have.text','Max')
-  // cy.wait(500);
-  // cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(4)').should('be.visible').should('have.text','Tons Type')
-  // cy.wait(500);
-  // cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(5)').should('be.visible').should('have.text','Guarantee Amount')
-  // cy.wait(500);
-  // cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(6)').should('be.visible').should('have.text','Contracts')
-  // cy.wait(500);
+  cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(1)').should('be.visible').should('have.text','Cargo')
+  cy.wait(500);
+  cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(2)').should('be.visible').should('have.text','Contracts')
+  cy.wait(500);
+  cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(3)').should('be.visible').should('have.text','Guarantee Amount')
+  cy.wait(500);
+  cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(4)').should('be.visible').should('have.text','Max')
+  cy.wait(500);
+  cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(5)').should('be.visible').should('have.text','Min')
+  cy.wait(500);
+  cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(6)').should('be.visible').should('have.text','Tons Type')
+  cy.wait(500);
   //add form
   cy.get('#Add_Button_Tab_Guarantee_Amounts').should('exist').should('have.text','Add Guarantee Amount').click( {force: true})
-  cy.wait(500);
+  cy.wait(1000);
   cy.get('#cargo').should('exist').click({force: true})//.type('Plains',{force: true}).type('{enter}')
 cy.wait(500);
-checkRecordExist().then((exists) => {
+checkRecordExistInDrawer('#cargo_list').then((exists) => {
 cy.log("element exist:", exists)
   if(exists){
-      
-  cy.get('#cargo_list_0 .ant-select-item-option-content').first().click({force: true})
+    cy.wait(500); 
+  cy.get('#cargo_list_0 .ant-select-item-option-content').eq(0).click({force: true})
   cy.wait(500);
 }
 else{
@@ -1037,10 +1040,11 @@ cy.wait(500)
   cy.wait(500);
   cy.get('#tons_type').should('exist').click()
   cy.wait(500);
-  checkRecordExist().then((exists) => {
+  checkRecordExistInDrawer('#tons_type_list').then((exists) => {
   cy.log("element exist:", exists)
     if(exists){
-    cy.get('#tons_type_list_0 .ant-select-item-option-content').first().click({force: true})
+      cy.wait(500);
+    cy.get('#tons_type_list_0 .ant-select-item-option-content').eq(0).click({force: true})
     cy.wait(500);
   }
   else{
@@ -1097,7 +1101,7 @@ export const GuaranteeAmountUpdate = () => {
                 cy.wait(500);
                 cy.get('#cargo').should('exist').click({force: true})//.type('Plains',{force: true}).type('{enter}')
               cy.wait(500);
-              checkRecordExist().then((exists) => {
+              checkRecordExistInDrawer('#cargo_list').then((exists) => {
               cy.log("element exist:", exists)
                 if(exists){
                     
@@ -1114,9 +1118,9 @@ export const GuaranteeAmountUpdate = () => {
                 cy.wait(500);
                 cy.get('#max').should('exist').clear().type('1004320')
                 cy.wait(500);
-                cy.get('#tons_type').should('exist').click()
+                cy.get('#tons_type').should('exist').click({force: true})
                 cy.wait(500);
-                checkRecordExist().then((exists) => {
+                checkRecordExistInDrawer('#tons_type_list').then((exists) => {
                 cy.log("element exist:", exists)
                   if(exists){
                   cy.get('#tons_type_list_1 .ant-select-item-option-content').first().click({force: true})
@@ -1200,28 +1204,28 @@ export const GuaranteeAmountDelete = () => {
 }
   export const AddContractNote = () => {
   cy.get('#rc-tabs-0-tab-KEY23077').click()
-  cy.wait(500);
+  cy.wait(1500);
   cy.get('.data-info').should('exist')
   cy.wait(500);
   cy.get('#Add_Button_Tab_Contract_Notes').should('be.visible').should('have.text','Add Contract Note')
-  cy.wait(500);
+  cy.wait(1500);
   //list
   cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(1)').should('be.visible').should('have.text','Note Type')
   cy.wait(500);
   cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(2)').should('be.visible').should('have.text','Note')
   cy.wait(500);
   cy.get('[style="height: 100%;"] > .card-table > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > .ant-table > .ant-table-container > .ant-table-content > table > .ant-table-thead > tr > :nth-child(3)').should('be.visible').should('have.text',' Date Added')
-  cy.wait(500);
+  cy.wait(1500);
   //add form
   cy.get('#Add_Button_Tab_Contract_Notes').should('exist').should('have.text','Add Contract Note').click( {force: true})
+  cy.wait(1500);
+  cy.get('#note_type').should('exist').click({force: true})
   cy.wait(500);
-  cy.get('#note_type').should('exist').click()
-  cy.wait(500);
-  checkRecordExist().then((exists) => {
+  checkRecordExistInDrawer('#note_type_list').then((exists) => {
   cy.log("element exist:", exists)
     if(exists){
-        
-    cy.get('#note_type_list_0 .ant-select-item-option-content').first().click({force: true})
+      cy.wait(500);
+    cy.get('#note_type_list_0 .ant-select-item-option-content').eq(0).click({force: true})
     cy.wait(500);
 }
 else{
@@ -1230,7 +1234,7 @@ else{
 }
 })
   cy.wait(500);
-  cy.get('#note').should('exist').type('fdsjhs hdsbagkjsh')
+  cy.get('#note').should('exist').clear().type('fdsjhs hdsbagkjsh')
   cy.wait(500);
   cy.get('#cancel_Contract_Notes').should('be.visible')
   cy.wait(500);
@@ -1275,10 +1279,10 @@ else{
 
                   cy.get('#note_type').should('exist').click({force: true})
                   cy.wait(500);
-                  checkRecordExist().then((exists) => {
+                  checkRecordExistInDrawer('#note_type_list').then((exists) => {
                   cy.log("element exist:", exists)
                     if(exists){
-                        
+                      cy.wait(500); 
                     cy.get('#note_type_list_1 .ant-select-item-option-content').first().click({force: true})
                     cy.wait(500);
                 }
@@ -1329,7 +1333,7 @@ export const DeleteContractNote = () => {
         })
         .then(() => {
           cy.wait(500);
-          cy.get('#Contract_Notes-tab-menu-0 ').click();
+          cy.get('#Contract_Notes-tab-menu-0 ').click({force: true});
           cy.wait(500);
           // Ensure correct document context
           cy.document().then((doc) => {

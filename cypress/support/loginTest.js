@@ -46,9 +46,9 @@
             cy.log('Response body:', interception.response.body);
             
           }
-          
          // expect(statusCode).to.equal(200);
         });
+        cy.wait(6000)
           //side menu botton close
         //   cy.get('.trigger').should('be.visible')   
         //   cy.wait(500);

@@ -3,66 +3,70 @@ import { loginTest } from '../../support/loginTest';
 import { JobList, AddJob, UpdateJob, DeleteJob, jobsetup  } from '../../support/Job';
 import {  opendrawer, Details, Canceljob, Customers, UpdateCustomer,  CustomerDelete, Notes, AddNoteforETADate, AddNoteforGeneralComment, AddNoteforCranePlanner,  DeleteBargeLoading, loading, AddLoading, UpdateBargeLoading, JobLogSummary, Equipment,  Documents, DeleteDocuments, Activity, Cranes, CraneAssigment, CraneWorkingTimes, DeleteCraneAssigment, UpdateCraneAssigmen, UpdateCraneWorkingTimes, DeleteCraneWorkingTimes, UpdateNote, DeleteNote, JobLogsList, addCraneLogs, AddEvent, EditEvent, DeleteEvent, EditJobLog, DeleteJobLog } from '../../support/job_drawer';
 import { contractList, Addcontractform, UpdateContract, DeleteContract, ContractOpenDawer, stevedoeingRate, stevedoeingRateUpdate, stevedoeingRateDelete, StorageRatesDelete,StorageRates, StorageRatesUpdate, GuaranteeAmount, GuaranteeAmountDelete, GuaranteeAmountUpdate, contractDetails, AddContractNote, UpdateContractNote, DeleteContractNote,  } from '../../support/Contract';
+import { MooringList, AddMooring,  DeleteMooring, UpdateMooring } from '../../support/mooring';
+import { InventoryList, CreateBL} from '../../support/Inventory';
 describe('ATM', function(){
+  beforeEach(() => {
+    loginTest()
+    cy.wait(10000)
+  })
   it('job  list ', function(){
-   loginTest()
-   cy.wait(500)
    JobList()
 })
    it('Add job ', function(){
-    loginTest()
+  
     cy.wait(500)
     AddJob()
 })
    it(' job setup', function(){
-    loginTest()
+ 
     cy.wait(500)
     jobsetup()
 })
    it('Update job ', function(){
-    loginTest()
+    
     cy.wait(500)
     UpdateJob()
 })
    it('delete job ', function(){
-    loginTest()
+
     cy.wait(500)
     DeleteJob()
 })
 it('open job drawer', function(){
-  loginTest()
+ 
   cy.wait(500)
   opendrawer()
 })
 it(' Job Details', function(){
-  loginTest()
+
   cy.wait(500)
   opendrawer()
   Details()
 })
 it(' Canceljob ', function(){
-  loginTest()
+ 
   cy.wait(500)
   opendrawer()
   cy.wait(500)
   Canceljob()
 })
 it('Cutomer list', function(){
-  loginTest()
+
   cy.wait(500)
   opendrawer()
   cy.wait(500);
   Customers()
 })
 it('Customers Update', function(){
-  loginTest()
+  
   cy.wait(500)
   opendrawer()
   cy.wait(500);
   UpdateCustomer()
   })
 it('Cutomer Delete', function(){
-  loginTest()
+  
   cy.wait(500)
   opendrawer()
   cy.wait(500);
@@ -70,14 +74,14 @@ it('Cutomer Delete', function(){
 })
 
 it('Note List ', function(){
-  loginTest()
+  
   cy.wait(500)
   opendrawer()
   cy.wait(500);
   Notes()
 })
 it(' Add Note for ET ADate', function(){
-  loginTest()
+ 
   cy.wait(500)
   opendrawer()
   cy.wait(500);
@@ -86,14 +90,14 @@ it(' Add Note for ET ADate', function(){
 })
 
 it(' Add Note for General Comment', function(){
-  loginTest()
+
   cy.wait(500)
   opendrawer()
   cy.wait(500);
 AddNoteforGeneralComment()
 })
 it('Add Note for Crane Planner', function(){
-  loginTest()
+  
   cy.wait(500)
   opendrawer()
   cy.wait(500);
@@ -101,7 +105,7 @@ it('Add Note for Crane Planner', function(){
 })
 
 it(' Update Note', function(){
-  loginTest()
+ 
   cy.wait(500)
   opendrawer()
   cy.wait(500);
@@ -109,14 +113,14 @@ it(' Update Note', function(){
 
 })
 it(' Delete note', function(){
-
-  loginTest()
+  cy.wait(500);
   opendrawer()
+  cy.wait(500);
 DeleteNote()
 
 })
 it('loading list', function(){
-  loginTest()
+  
   cy.wait(500)
   opendrawer()
   cy.wait(500);
@@ -124,27 +128,24 @@ it('loading list', function(){
  
 })
 it('Add barge loading ', function(){
-  loginTest()
-  cy.wait(500)
+ cy.wait(500)
   opendrawer()
-  cy.wait(6000);
+  cy.wait(500)
   AddLoading()
-   // dropdown not select 
-})
-it('DeleteBargeLoading', function(){
-  loginTest()
-  cy.wait(500)
-  opendrawer()
-  DeleteBargeLoading()
-  
 })
 it('Update Barge leading ', function(){
-  loginTest()
   cy.wait(500)
   opendrawer()
+  cy.wait(500)
   UpdateBargeLoading()
 })
- // dropdown not select 
+it('DeleteBargeLoading', function(){
+  cy.wait(500)
+  opendrawer()
+  cy.wait(500);
+  DeleteBargeLoading()
+  })
+  
 it('Job Log Summary', function(){
 
 
@@ -160,60 +161,57 @@ it('Equipment ', function(){
   Equipment()
 })
 it('Job Logs list', function(){
-  loginTest()
-  cy.wait(500)
   opendrawer()
+  cy.wait(6000)
   JobLogsList()
 })
 it('add Crane Logs', function(){
-  loginTest()
-  cy.wait(500)
+
   opendrawer()
+  cy.wait(6000)
   addCraneLogs()
 })
 it('Edit Crane Logs', function(){
-  loginTest()
-  cy.wait(500)
+ 
   opendrawer()
+  cy.wait(6000)
   EditJobLog()
 
 })
 it('Delete Crane Logs', function(){
-  loginTest()
-  cy.wait(500)
   opendrawer()
+cy.wait(6000)
   DeleteJobLog()
  
 })
 it(' Add Event ', function(){
-  loginTest()
-  cy.wait(500)
+
   opendrawer()
+  cy.wait(6000)
   AddEvent()
 })
 it(' Update Event ', function(){
-  loginTest()
-  cy.wait(500)
+  
   opendrawer()
+  cy.wait(6000)
   EditEvent()
 })
 it(' Delete Event ', function(){
-  loginTest()
-  cy.wait(500)
+
   opendrawer()
+  cy.wait(6000)
   DeleteEvent()
 })
 
 it('uploade Documents', function(){
-  loginTest()
-  cy.wait(500)
+ cy.wait(500)
   opendrawer()
+  cy.wait(500)
   Documents()
-  //replace id of add document 
+ 
 })  
 it('Delete Documents', function(){
-  loginTest()
-  cy.wait(500)
+ 
   opendrawer()
   DeleteDocuments()
 }) 
@@ -224,174 +222,207 @@ it('Activity', function(){
   Activity()
 }) 
 it('Crane list', function(){
-  loginTest()
   cy.wait(500)
   opendrawer()
+  cy.wait(500)
   Cranes()
 }) 
-it.only('CraneAssigment', function(){
-  loginTest()
+it('CraneAssigment', function(){
   cy.wait(500)
   opendrawer()
+  cy.wait(1000)
   CraneAssigment()
 }) 
 it(' Update Crane Assigment', function(){
-  loginTest()
   cy.wait(500)
   opendrawer()
+  cy.wait(500)
   UpdateCraneAssigmen()
   
 }) 
 
 it(' Delete Crane Assigment', function(){
-  loginTest()
   cy.wait(500)
   opendrawer()
+  cy.wait(500)
   DeleteCraneAssigment()
   
 }) 
 
 it('CraneWorkingTimes', function(){
-  loginTest()
   cy.wait(500)
   opendrawer()
+  cy.wait(500)
   CraneWorkingTimes()
 }) 
 it('Update Crane Working Times', function(){
-  loginTest()
   cy.wait(500)
   opendrawer()
+  cy.wait(500)
   UpdateCraneWorkingTimes()
  
 })
 it('Delete Crane Working Times ', function(){
-  loginTest()
   cy.wait(500)
   opendrawer()
+  cy.wait(500)
   DeleteCraneWorkingTimes()
  
 })
 it('Contract List', function(){
-  loginTest()
+  cy.wait(500)
   contractList()
  
 })
 it('Add contract', function(){
-  loginTest()
+
   cy.wait(500)
   Addcontractform()
  
 })
 it('Update contract', function(){
-  loginTest()
+ 
   cy.wait(500)
   UpdateContract()
 
  
 })
 it('Delete contract', function(){
-  loginTest()
+
   cy.wait(500)
   DeleteContract()
  
  
 })
 it('Contract Open dawer', function(){
-  loginTest()
+
   cy.wait(500)
 ContractOpenDawer()
 
 })
 it('Contract details', function(){
-  loginTest()
+  
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   contractDetails()
 
 })
 it('Add stevedoeing Rate ', function(){
-  loginTest()
+  
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   stevedoeingRate()
 })
 it(' stevedoeing Rate Update', function(){
-  loginTest()
+ 
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   stevedoeingRateUpdate()
 })
 it('stevedoeing Rate Delete', function(){
-  loginTest()
+  
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   stevedoeingRateDelete()
 })
 it(' Add Storage Rates', function(){
-  loginTest()
+  
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   StorageRates()
 })
 it(' Udate Storage Rates', function(){
-  loginTest()
+  
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   StorageRatesUpdate()
 })
 it('Delete Storage Rates', function(){
-  loginTest()
+
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   StorageRatesDelete()
 })
 it(' add Guarantee Amount', function(){
-  loginTest()
+
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   GuaranteeAmount()
 })
 it(' Guarantee Amount Update', function(){
-  loginTest()
+ 
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   GuaranteeAmountUpdate()
 })
 it(' Guarantee Amount Delete', function(){
-  loginTest()
+
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   GuaranteeAmountDelete()
 })
 it('Add Contract Note', function(){
-  loginTest()
+  
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   AddContractNote()
 })
 it('Update Contract Note', function(){
-  loginTest()
+  
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   UpdateContractNote()
 })
 it('Delete Contract Not', function(){
-  loginTest()
+
   cy.wait(500)
   ContractOpenDawer()
+  cy.wait(500)
   DeleteContractNote()
 })
-it('', function(){
-  loginTest()
+it('Mooring List', function(){
+  
   cy.wait(500)
-  ContractOpenDawer()
+  MooringList()
 })
-it('', function(){
-  loginTest()
+it('Add Mooring', function(){
+  
   cy.wait(500)
-  ContractOpenDawer()
+  AddMooring()
+  //select unit type
 })
 
-
-
+it.only('Update  Mooring', function(){
+  
+  cy.wait(500)
+UpdateMooring()
+//clear at rate 
+//select unit type
+})
+it('Delete  Mooring', function(){
+  
+  cy.wait(500)
+DeleteMooring()
+})
+it('Cargo Details list', function(){ 
+  cy.wait(500)
+  InventoryList()
+})
+it('Add Create BL', function(){ 
+  cy.wait(500)
+  CreateBL()
+  
+})
 });

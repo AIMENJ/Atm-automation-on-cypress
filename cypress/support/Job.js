@@ -3,7 +3,7 @@
 import dayjs from 'dayjs'
 
  export const JobList = () => {
- cy.get('[id="/jobs"]').click() 
+  cy.get('#Jobs').click() 
           // header jobs
       cy.get('#heading-navbar').should('be.visible').should('have.text', 'Jobs')
       cy.wait(1000);
@@ -29,18 +29,18 @@ import dayjs from 'dayjs'
       }
 export const AddJob = () =>  {
         cy.getCurrentDate().then((currentDate) => {
-          cy.get('[id="/jobs"]').click()
+          cy.get('#Jobs').click()
         cy.get('#Add_Button_Jobs').click()
         cy.wait(1000);
         cy.get('#vessel_name').should('exist').should('be.empty').type('test Vessel')
         cy.wait(500);
-        cy.get('#ant_design_form_location').should('exist').should('be.empty').click()//.type('Plains',{force: true}).type('{enter}')
+        cy.get('#location').should('exist').should('be.empty').click()//.type('Plains',{force: true}).type('{enter}')
         cy.wait(500);
         checkRecordeExist().then((exists) => {
         cy.log("element exist:", exists)
           if(exists){
               
-          cy.get('#ant_design_form_location_list_0 .ant-select-item-option-content').first().click({force: true})
+          cy.get('#location_list_0 .ant-select-item-option-content').first().click({force: true})
           cy.wait(500);
      }
      else{
@@ -49,13 +49,13 @@ export const AddJob = () =>  {
      }
      })
           cy.wait(500);
-          cy.get('#ant_design_form_billing_company').should('exist').click({force: true})
+          cy.get('#billing_company').should('exist').click({force: true})
           cy.wait(500);
           checkRecordeExist().then((exists) => {
            cy.log("element exist:", exists)
            if(exists){
               
-          cy.get('#ant_design_form_billing_company_list_0 .ant-select-item-option-content').eq(0).click({force: true})
+          cy.get('#billing_company_list_0 .ant-select-item-option-content').eq(0).click({force: true})
           cy.wait(500);
      }
      else{
@@ -66,12 +66,12 @@ export const AddJob = () =>  {
          cy.wait(500);
          cy.get('#eta_date').should('exist').should('be.empty').type(currentDate)
          cy.wait(500);
-         cy.get('#ant_design_form_job_type').should('exist').click()
+         cy.get('#job_type').should('exist').click()
          checkRecordeExist().then((exists) => {
          cy.log("element exist:", exists)
         if(exists){
               
-            cy.get('#ant_design_form_job_type_list_0 .ant-select-item-option-content').first().click({force: true})
+            cy.get('#job_type_list_0 .ant-select-item-option-content').first().click({force: true})
             cy.wait(500);
      }
      else{
@@ -105,7 +105,7 @@ export const AddJob = () =>  {
 
       }
 export const UpdateJob = () => { 
-  cy.get('[id="/jobs"]').click()
+  cy.get('#Jobs').click()
         let result;
         checkRecordeExist().then((exists) => {
         cy.log("element exist:", exists)
@@ -136,15 +136,15 @@ export const UpdateJob = () => {
               
                   cy.wait(1000);
                   cy.getCurrentDate().then((currentDate) => {
-                  cy.get('#vessel_name').should('exist').clear().type('Vessel job')
+                  cy.get('#vessel_name').should('exist').clear({force: true}).type('Vessel job')
                   cy.wait(500);
-                  cy.get('#ant_design_form_location').should('exist').click({force: true})
+                  cy.get('#location').should('exist').click({force: true})
                   cy.wait(500);
                   checkRecordeExist().then((exists) => {
                   cy.log("element exist:", exists)
                   if(exists){
                   
-                  cy.get('#ant_design_form_location_list_1 .ant-select-item-option-content').first().click({force: true})
+                  cy.get('#location_list_1 .ant-select-item-option-content').first().click({force: true})
                   cy.wait(500);
 }
  else{
@@ -153,13 +153,13 @@ export const UpdateJob = () => {
 }
   })
                    cy.wait(500);
-                   cy.get('#ant_design_form_billing_company').should('exist').click({force: true})
+                   cy.get('#billing_company').should('exist').click({force: true})
                    cy.wait(500);
                    checkRecordeExist().then((exists) => {
                    cy.log("element exist:", exists)
                   if(exists){
                   
-                  cy.get('#ant_design_form_billing_company_list_1 .ant-select-item-option-content').eq(0).click({force: true})
+                  cy.get('#billing_company_list_1 .ant-select-item-option-content').eq(0).click({force: true})
                   cy.wait(500);
  }
  else{
@@ -170,11 +170,11 @@ export const UpdateJob = () => {
                   cy.wait(500);
                   cy.get('#eta_date').should('exist').type(currentDate)
                   cy.wait(500);
-                  cy.get('#ant_design_form_job_type').should('exist').click( {force: true})
+                  cy.get('#job_type').should('exist').click( {force: true})
                   checkRecordeExist().then((exists) => {
                   cy.log("element exist:", exists)
                   if(exists){
-                  cy.get('#ant_design_form_job_type_list_0 .ant-select-item-option-content').first().click({force: true})
+                  cy.get('#job_type_list_0 .ant-select-item-option-content').first().click({force: true})
                   cy.wait(500);
  }
   else{
@@ -201,7 +201,8 @@ cy.log('recode not found ')
 } 
 
 export const DeleteJob = () => { 
-  cy.get('[id="/jobs"]').click()
+  cy.wait(500)
+  cy.get('#Jobs').click()
   let result;
   checkRecordeExist().then((exists) => {
  cy.log("element exist:", exists)
@@ -248,6 +249,16 @@ resolve(!elementExist)
 }) 
 }
 
+export function checkRecordExistInDrawer(table_id) {
+  return new Cypress.Promise((resolve) => {
+    cy.get(table_id).within(($drawer) => {
+      const elementExist = $drawer[0].querySelector(".ant-empty-description") !== null;
+      cy.log(elementExist);
+      resolve(!elementExist);
+    });
+  });
+}
+
 const checkSelection = (search, id) => {
 return new Cypress.Promise((resolve, reject)=>{
 cy.document().then((doc)=>{
@@ -258,7 +269,7 @@ resolve(!elementExist)
 })
 }
 export const jobsetup = () => {
-  cy.get('[id="/jobs"]').click()
+  cy.get('#Jobs').click()
 
   //job setup notification screen 
 cy.get('#job-gear-button').should('be.visible').click()
@@ -286,11 +297,10 @@ cy.get('#acct_year').should('exist')
 cy.wait(500);
 cy.get('#coordinator').should('exist').click( {force: true})
 cy.wait(500);
-checkRecordeExist().then((exists) => {
+checkRecordExistInDrawer('#coordinator_list').then((exists) => {
 cy.log("element exist:", exists)
 if(exists){
-      
-cy.get('#coordinator_list_0 .ant-select-item-option-content').eq(0).click({force: true}).eq(0).click({force: true})
+cy.get('#coordinator_list_0 .ant-select-item-option-content').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
@@ -298,9 +308,9 @@ cy.log('dropdown not found ')
 }
 }) 
 cy.wait(500);
-cy.get('#sales_rep').should('exist').click()
+cy.get('#sales_rep').should('exist').click( {force: true})
 cy.wait(500);
-checkRecordeExist().then((exists) => {
+checkRecordExistInDrawer('#sales_rep_list').then((exists) => {
 cy.log("element exist:", exists)
 if(exists){   
 cy.get('#sales_rep_list_0 .ant-select-item-option-content').eq(0).click({force: true})
@@ -389,11 +399,11 @@ cy.get('#previous-setup').should('exist')
  cy.wait(500)
 cy.wait(6000)
 //Customer
-cy.get('#customers_0_customer').should('exist').click()
+cy.get('#customer0').should('exist').click()
 cy.wait(500);
-checkSelection('customer_0_customer_list_0', true).then((exists)=>{
+checkRecordExistInDrawer('#customer0_list').then((exists)=>{
 if(exists){   
-cy.get('#customers_0_customer_list_0').eq(0).click({force: true})
+cy.get('#customer0_list_0').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
@@ -401,11 +411,11 @@ cy.log('dropdown not found ')
 }
 })
 cy.wait(500);
-cy.get('#customers_0_agent').should('exist').click()
+cy.get('#agent0').should('exist').click()
 cy.wait(500);
-checkSelection('customer_0_agent_list_0', true).then((exists)=>{
+checkRecordExistInDrawer('#agent0_list', true).then((exists)=>{
 if(exists){
- cy.get('#customers_0_agent_list_0').eq(0).click({force: true})
+ cy.get('#agent0_list_0').eq(0).click({force: true})
  cy.wait(500);
 }
 else{
@@ -413,10 +423,10 @@ cy.log('dropdown not found ')
 }
 })
 cy.wait(500);
-cy.get('#customers_0_surveyor').should('exist').click()
-checkSelection('customer_0_surveyor_list_0', true).then((exists)=>{
+cy.get('#surveyor0').should('exist').click()
+checkRecordExistInDrawer('#surveyor0_list', true).then((exists)=>{
 if(exists){
-cy.get('#customers_0_surveyor_list_0').eq(0).click({force: true})
+cy.get('#surveyor0_list_0').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
@@ -424,11 +434,11 @@ cy.log('dropdown not found ')
 }
 })
 cy.wait(500);
-cy.get('#customers_0_cargo').should('exist').click()
+cy.get('#cargo0').should('exist').click()
 cy.wait(500);
-checkSelection('customer_0_cargo_list_0', true).then((exists)=>{
+checkRecordExistInDrawer('#cargo0_list', true).then((exists)=>{
 if(exists){
- cy.get('#customers_0_cargo_list_0').eq(0).click({force: true})
+ cy.get('#cargo0_list_0').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
@@ -442,11 +452,11 @@ cy.get('#pieces0').should('exist').type('100')
 cy.wait(500);
 cy.get('#cbm0').should('exist').type('6wer32')
 cy.wait(500);
-cy.get('#customers_0_contract').should('exist').click()
+cy.get('#contract0').should('exist').click()
 cy.wait(500);
-checkSelection('customer_0_contract_list_0', true).then((exists)=>{
+checkRecordExistInDrawer('#contract0_list', true).then((exists)=>{
 if(exists){ 
-cy.get('#customers_0_contract_list_0').eq(0).click({force: true})
+cy.get('#contract0_list_0').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
@@ -458,11 +468,11 @@ cy.get('#target_tph0').should('exist').type('324')
 cy.wait(500);
 cy.get('#po_number0').should('exist').type('435')
 cy.wait(500);
-cy.get('#customers_0_liner_term').should('exist').click()
+cy.get('#liner_term0').should('exist').click()
 cy.wait(500);
-checkSelection('customer_0_liner_term_list_0', true).then((exists)=>{
+checkRecordExistInDrawer('#liner_term0_list', true).then((exists)=>{
 if(exists){
-cy.get('#customers_0_liner_term_list_0').eq(0).click({force: true})
+cy.get('#liner_term0_list_0').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
@@ -476,11 +486,11 @@ cy.wait(100);
 //add  2nd customer 
 cy.get('#Add_Customer').scrollIntoView().should('exist').click()
 cy.wait(500);
-cy.get('#customers_1_customer').should('exist').click()
+cy.get('#customer1').should('exist').click()
 cy.wait(500);
-checkSelection('customer_1_customer_list_1', true).then((exists)=>{
+checkRecordExistInDrawer('#customer1_list', true).then((exists)=>{
 if(exists){
-cy.get('#customers_1_customer_list_1').eq(0).click({force: true})
+cy.get('#customer1_list_1').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
@@ -488,11 +498,11 @@ cy.log('dropdown not found ')
 }
 })
 cy.wait(500);
-cy.get('#customers_1_agent').should('exist').click()
+cy.get('#agent1').should('exist').click()
 cy.wait(500);
-checkSelection('customer_1_agent_list_1', true).then((exists)=>{
+checkRecordExistInDrawer('#agent1_list', true).then((exists)=>{
 if(exists){
- cy.get('#customers_1_agent_list_1').eq(0).click({force: true})
+ cy.get('#agent1_list_1').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
@@ -500,10 +510,10 @@ cy.log('dropdown not found ')
 }
 })
 cy.wait(500);
-cy.get('#customers_1_surveyor').should('exist').click()
-checkSelection('customer_1_surveyor_list_1', true).then((exists)=>{
+cy.get('#surveyor1').should('exist').click()
+checkRecordExistInDrawer('#surveyor1_list', true).then((exists)=>{
  if(exists){  
-cy.get('#customers_1_surveyor_list_1').eq(0).click({force: true})
+cy.get('#surveyor1_list_1').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
@@ -511,11 +521,11 @@ cy.log('dropdown not found ')
 }
 })
 cy.wait(500);
-cy.get('#customers_1_cargo').should('exist').click()
+cy.get('#cargo1').should('exist').click()
 cy.wait(500);
-checkSelection('customer_1_cargo_list_1', true).then((exists)=>{
+checkRecordExistInDrawer('#cargo1_list', true).then((exists)=>{
 if(exists){
-cy.get('#customers_1_cargo_list_1').eq(0).click({force: true})
+cy.get('#cargo1_list_1').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
@@ -529,11 +539,11 @@ cy.get('#pieces1').should('exist').type('100')
 cy.wait(500);
 cy.get('#cbm1').should('exist').type('6wer32')
 cy.wait(500);
-cy.get('#customers_1_contract').should('exist').click()
+cy.get('#contract1').should('exist').click()
 cy.wait(500);
-checkSelection('customer_1_contract_list_0', true).then((exists)=>{
+checkRecordExistInDrawer('#contract1_list', true).then((exists)=>{
 if(exists){
-cy.get('#customers_1_contract_list_0').eq(0).click({force: true})
+cy.get('#contract1_list_0').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
@@ -545,11 +555,11 @@ cy.get('#target_tph1').should('exist').type('324')
 cy.wait(500);
 cy.get('#po_number1').should('exist').type('435')
 cy.wait(500);
-cy.get('#customers_1_liner_term').should('exist').click()
+cy.get('#liner_term1').should('exist').click()
 cy.wait(500);
-checkSelection('customer_1_liner_term_list_1', true).then((exists)=>{
+checkRecordExistInDrawer('#liner_term1_list', true).then((exists)=>{
 if(exists){
-cy.get('#customers_1_liner_term_list_1').eq(0).click({force: true})
+cy.get('#liner_term1_list_1').eq(0).click({force: true})
 cy.wait(500);
 }
 else{
